@@ -2,10 +2,10 @@
 
 Given /the following movies exist/ do |movies_table|
   movies_table.hashes.each do |movie|
+    mov = Movie.new movie
     # each returned element will be a hash whose key is the table header.
     # you should arrange to add that movie to the database here.
   end
-  flunk "Unimplemented"
 end
 
 # Make sure that one string (regexp) occurs before or after another one
@@ -25,4 +25,24 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   # HINT: use String#split to split up the rating_list, then
   #   iterate over the ratings and reuse the "When I check..." or
   #   "When I uncheck..." steps in lines 89-95 of web_steps.rb
+end
+
+Then /I should see movies of rating 'PG' or 'R'/ do
+  page.body.should match(/<td>PG<\/td>/)
+  page.body.should match(/<td>R<\/td>/)
+end
+
+Then /^I should see (.+) table$/ do |table_id, expected_table|
+
+  def table_at(selector) # see https://gist.github.com/1149139
+    Nokogiri::HTML(page.body).css(selector).map do |table|
+      table.css('tr').map do |tr|
+        tr.css('th, td').map { |td| td.text }
+      end
+    end[0].reject(&:empty?)
+  end
+
+  html_table = table_at("##{table_id.parameterize.tableize}").to_a
+  html_table.map! { |r| r.map! { |c| c.gsub(/<.+?>/, '').gsub(/[\n\t\r]/, '') } }
+  expected_table.diff!(html_table)
 end

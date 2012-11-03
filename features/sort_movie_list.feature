@@ -23,9 +23,36 @@ Background: movies have been added to database
 
 Scenario: sort movies alphabetically
   When I follow "Movie Title"
+  Then I should see movies table
+  | Movie Title             | Rating | Release Date            | More Info                          |
+  | 2001: A Space Odyssey   | G      | 1968-04-06 00:00:00 UTC | More about 2001: A Space Odyssey   |
+  | Aladdin                 | G      | 1992-11-25 00:00:00 UTC | More about Aladdin                 |
+  | Amelie                  | R      | 2001-04-25 00:00:00 UTC | More about Amelie                  |
+  | Chicken Run             | G      | 2000-06-21 00:00:00 UTC | More about Chicken Run             |
+  | Chocolat                | PG-13  | 2001-01-05 00:00:00 UTC | More about Chocolat                |
+  | Raiders of the Lost Ark | PG     | 1981-06-12 00:00:00 UTC | More about Raiders of the Lost Ark |
+  | The Help                | PG-13  | 2011-08-10 00:00:00 UTC | More about The Help                |
+  | The Incredibles         | PG     | 2004-11-05 00:00:00 UTC | More about The Incredibles         |
+  | The Terminator          | R      | 1984-10-26 00:00:00 UTC | More about The Terminator          |
+  | When Harry Met Sally    | R      | 1989-07-21 00:00:00 UTC | More about When Harry Met Sally    |
+
+  
   # your steps here
 
 Scenario: sort movies in increasing order of release date
   When I follow "Release Date"
+  Then I should see movies table
+  | Movie Title             | Rating | Release Date            | More Info                          |
+  | 2001: A Space Odyssey   | G      | 1968-04-06 00:00:00 UTC | More about 2001: A Space Odyssey   |
+  | Raiders of the Lost Ark | PG     | 1981-06-12 00:00:00 UTC | More about Raiders of the Lost Ark |
+  | The Terminator          | R      | 1984-10-26 00:00:00 UTC | More about The Terminator          |
+  | When Harry Met Sally    | R      | 1989-07-21 00:00:00 UTC | More about When Harry Met Sally    |
+  | Aladdin                 | G      | 1992-11-25 00:00:00 UTC | More about Aladdin                 |
+  | Chicken Run             | G      | 2000-06-21 00:00:00 UTC | More about Chicken Run             |
+  | Chocolat                | PG-13  | 2001-01-05 00:00:00 UTC | More about Chocolat                |
+  | Amelie                  | R      | 2001-04-25 00:00:00 UTC | More about Amelie                  |
+  | The Incredibles         | PG     | 2004-11-05 00:00:00 UTC | More about The Incredibles         |
+  | The Help                | PG-13  | 2011-08-10 00:00:00 UTC | More about The Help                |
+
   # your steps here
 
